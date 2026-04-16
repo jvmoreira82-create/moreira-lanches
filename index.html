@@ -4,6 +4,100 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Esfirras do Moreira - Pedidos</title>
+
+    <style>
+        :root {
+            --cor-principal: #D32F2F;
+            --cor-secundaria: #25D366;
+            --fundo: #F8F9FA;
+            --texto: #2D3436;
+            --branco: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--fundo);
+            color: var(--texto);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            background-color: var(--cor-principal);
+            width: 100%;
+            color: var(--branco);
+            text-align: center;
+            padding: 30px 0;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        header h1 { margin: 0; font-size: 1.8rem; text-transform: uppercase; letter-spacing: 1px; }
+        header p { margin: 5px 0 0; opacity: 0.9; font-style: italic; }
+
+        section {
+            width: 90%;
+            max-width: 450px;
+            background: var(--branco);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            margin-bottom: 30px;
+        }
+
+        h2 { color: var(--cor-principal); border-bottom: 2px solid #eee; padding-bottom: 10px; font-size: 1.4rem; }
+
+        ul { list-style: none; padding: 0; }
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-bottom: 1px dashed #eee;
+        }
+        li b { color: var(--cor-principal); }
+
+        label { font-weight: bold; display: block; margin-top: 15px; color: #636e72; font-size: 0.9rem; }
+
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border: 2px solid #eee;
+            border-radius: 10px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: 0.3s;
+        }
+
+        input:focus, textarea:focus { border-color: var(--cor-principal); outline: none; }
+
+        button {
+            background-color: var(--cor-secundaria);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 18px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 12px;
+            margin-top: 25px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        button:active { transform: scale(0.98); }
+
+        #campo-endereco {
+            transition: all 0.4s ease;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -24,7 +118,7 @@
         <h2>Promoções</h2>
         <ul>
             <li>Esfirra + Refrigerante - R$10,00</li>
-            <li>4 Esfirras - R$20,00</li>
+            <li>3 Esfirras - R$15,00</li>
         </ul>
     </section>
 
@@ -33,7 +127,7 @@
         <ul>
             <li><span class="icon">&#128176;</span> Pix </li>
             <li><span class="icon">&#128179;</span> Cartão de Crédito/Débito (Acréscimo da Maquininha) </li>
-            <li><span class="icon">&#128181;</span> Dinmheiro </li>
+            <li><span class="icon">&#128181;</span> Dinheiro </li>
         </ul>
     </section>
 
@@ -41,12 +135,15 @@
         <h2>Faça seu Pedido</h2>
         <form>
             <p><strong>Como deseja receber?</strong></p>
-            <input type="radio" id="retirada" name="local" value="Retirada na SecLog-GLOG" checked onclick="toggleEndereco(false)">
-            <label for="retirada">Retirar na SecLog-GLOG</label><br>
+            <label class="radio-container">
+                <input type="radio" id="retirada" name="local" value="Retirada na SecLog-GLOG" checked onclick="toggleEndereco(false)">
+                Retirar na SecLog-GLOG
+            </label>
 
-            <input type="radio" id="entrega" name="local" value="Entrega" onclick="toggleEndereco(true)">
-            <label for="entrega">Entrega (Consultar Disponibilidade)</label>
-            <br>
+            <label class="radio-container">
+                <input type="radio" id="entrega" name="local" value="Entrega" onclick="toggleEndereco(true)">
+                Entrega (Consultar Disponibilidade)
+            </label>
 
             <div id="campo-endereco"
             style="display: none; margin-top: 10px;">
