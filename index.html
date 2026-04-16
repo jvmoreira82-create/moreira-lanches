@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Esfirras do Moreira - Pedidos</title>
+</head>
+<body>
+    <header>
+        <h1> Esfirras do Moreira </h1>
+        <p> Os melhores salgados da Base! </p>
+    </header>
+
+    <section id="cardapio">
+        <h2>Cardápio</h2>
+        <ul>
+            <li>Esfirra de Frango com Catupiry - R$6,00</li>
+            <li>Esfirra de Presunto e Queijo - R$6,00</li>
+            <li>Coca-Cola Lata - 5,00</li>
+        </ul>
+    </section>
+
+     <section id="promoções">
+        <h2>Promoções</h2>
+        <ul>
+            <li>Esfirra + Refrigerante - R$10,00</li>
+            <li>4 Esfirras - R$20,00</li>
+        </ul>
+    </section>
+
+    <section class="pagamento">
+        <h3>Formas de Pagamento</h3>
+        <ul>
+            <li><span class="icon">&#128176;</span> Pix </li>
+            <li><span class="icon">&#128179;</span> Cartão de Crédito/Débito (Acréscimo da Maquininha) </li>
+            <li><span class="icon">&#128181;</span> Dinmheiro </li>
+        </ul>
+    </section>
+
+    <section id="pedido">
+        <h2>Faça seu Pedido</h2>
+        <form>
+            <p><strong>Como deseja receber?</strong></p>
+            <input type="radio" id="retirada" name="local" value="Retirada na SecLog-GLOG" checked onclick="toggleEndereco(false)">
+            <label for="retirada">Retirar na SecLog-GLOG</label><br>
+
+            <input type="radio" id="entrega" name="local" value="Entrega" onclick="toggleEndereco(true)">
+            <label for="entrega">Entrega (Consultar Disponibilidade)</label>
+            <br>
+
+            <div id="campo-endereco"
+            style="display: none; margin-top: 10px;">
+                <label>Aonde será a Entrega?</label><br>
+                <input type="text" id="endereco" placeholder="Ex: Ferramentaria 78">
+            </div>
+
+            <br>
+            <label> Qual Salgado você Quer?</label><br>
+            <input type="text" id="pedido_texto" placeholder="Ex: 2 Esfirras de Frango e 1 Coca"><br><br>
+
+            <button type="button" onclick="enviarWhatsApp()">Enviar Pedido</button>
+        </form>
+    </section>
+
+    <script>
+    function enviarWhatsApp() {
+        const numero = "559284562737";
+
+        const pedido = document.getElementById('pedido_texto').value;
+        const localRadio = document.querySelector('input[name="local"]:checked');
+        const local = localRadio ? localRadio.value : "Não especificado";
+        const endereco = document.getElementById('endereco').value;
+
+        let infoLocal = local;
+        if (local === "Entrega") {
+            infoLocal = `Entrega em: ${endereco}`;
+        }
+
+        const mensagem = `Olá Moreira! Gostaria de fazer um pedido:%0A%0A*Pedido:* ${pedido}%0A*Forma:* ${infoLocal}`;
+        window.open(`https://wa.me/${numero}?text=${mensagem}`, '_blank');
+    }
+
+    function toggleEndereco(mostrar) {
+        const div = document.getElementById('campo-endereco');
+        if(div) {
+            div.style.display = mostrar ? 'block' : 'none';
+        }
+    }
+    toggleEndereco(false);
+    </script>
+</body>
+</html>
